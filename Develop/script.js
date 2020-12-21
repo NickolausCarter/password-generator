@@ -1,39 +1,7 @@
-// Assignment code here
+// creates variable that is tied to HTML 'generate' id for "Generate Password" button
+var generateBtn = document.querySelector("#generate");
 
-var passwordEl = {
-  lowerCase: "abcdefghijklmnopqrstuvwxyz",
-  upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  number: "0123456789",
-  symbol: " !$&)'(*]+[-.#/:;<=>?@|^_`{|~",
-  value: ""
-}
-
-// random character generator functions begin
-var randomLowerCase = function () {
-  var value = randomPassword.lowerCase[Math.floor(Math.random() * randomPassword.lowerCase.length)];
-  console.log(value);
-  return value;
-}
-
-var randomUpperCase = function () {
-  var value = randomPassword.upperCase[Math.floor(Math.random() * randomPassword.upperCase.length)];
-  console.log(value);
-  return value;
-}
-
-var randomNumber = function() {
-  var value = randomPassword.number[Math.floor(Math.random() * randomPassword.number.length)];
-  console.log(value);
-  return value;
-}
-
-var randomSymbol = function () {
-  var value = randomPassword.symbol[Math.floor(Math.random() * randomPassword.symbol.length)];
-  console.log(value)
-  return value;
-}
-// random character generator functions end
-
+// request input from user to establish parameters for password creation
 var writePassword = function() {
   var passwordLength = window.prompt("How long should your password be? Please type a number between 8 and 128.");
 
@@ -66,23 +34,36 @@ var writePassword = function() {
     }
 }
 
-// var generatePassword() {
-//   var window.confirm
-// }
+// generate password based on criteria selected in writePassword function
+var generatePassword = function(passwordLength, lowerCases, upperCases, numbers, symbols) {
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var number = "0123456789";
+  var symbol = " !$&)'(*]+[-.#/:;<=>?@|^_`{|~";
+  var passwordContainer;
+  var passwordValue = "";
 
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+  if (lowerCases) {
+    passwordContainer += lowerCase;
+  }
+  if (upperCases) {
+    passwordContainer += upperCase;
+  }
+  if (numbers) {
+    passwordContainer += number;
+  }
+  if (symbols) {
+    passwordContainer += symbol;
+  }
 
-// Write password to the #password input
-function writePassword() {
-  // var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  for (var i = 0, x = passwordContainer.length; i < passwordLength; i++) {
+    passwordValue += passwordContainer.charAt(Math.floor(Math.random() * x));
+  }
 
-  return passwordText.value = password;
+  document.querySelector("#password").innerHTML = passwordValue;
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
-randomSymbol()
+// Call writePassword function when "Generate Password" button is clicked
+generateBtn.addEventListener("click", writePassword);
