@@ -34,12 +34,13 @@ var generatePassword = function(passwordLength, lowerCases, upperCases, numbers,
     var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var number = "0123456789";
     var symbol = " !$&)'(*]+[-.#/:;<=>?@|^_`{|~";
-    var passwordContainer;
+    var passwordContainer = "";
     var passwordValue = "";
 
     // compile variable strings into container based on selections from writePassword function
     if (lowerCases) {
         passwordContainer = lowerCase;
+        console.log(lowerCases);
     }
     if (upperCases) {
         passwordContainer += upperCase;
@@ -54,6 +55,7 @@ var generatePassword = function(passwordLength, lowerCases, upperCases, numbers,
     // create random password with random selection from container that meets length requirement
     for (var i = 0, x = passwordContainer.length; i < passwordLength; i++) {
         passwordValue += passwordContainer.charAt(Math.floor(Math.random() * x));
+        console.log(passwordValue);
     }
 
     document.querySelector("#password").textContent = passwordValue;
